@@ -1,3 +1,23 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./_variables";
+@import "./_bootswatch";
+
 body {
     background-color: lightgray;
+
+    .container-fluid{
+        padding: 0px !important;
+    }
+
+    nav.navbar{
+        background-color: white;
+        height: 75px;
+        border-bottom: 10px solid #fadd00 !important;
+        top: 0;
+        z-index: 200;
+    }
+
+    .navbar-brand img {
+        width: 80%;
+    }
 }
