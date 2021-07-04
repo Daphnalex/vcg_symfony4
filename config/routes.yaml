@@ -1,6 +1,25 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-index:
+home:
   path: /
   controller: App\Controller\HomeController::index
+news:
+  path: /articles
+  controller: App\Controller\ArticleController:index
+entrainement:
+  path: /entrainements
+  controller: App\Controller\EntrainementController::index
+competition:
+  path: /competitions
+  controller: App\Controller\CompetitionController::index
+club:
+  path: /club
+  controller: App\Controller\ClubController::index
+login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+    methods: GET|POST
+logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout

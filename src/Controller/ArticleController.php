@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 
 
-class HomeController extends AbstractController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/", name="home")
@@ -17,10 +17,10 @@ class HomeController extends AbstractController
     {
 
         $em = $this->getDoctrine()->getManager();
-        $last_articles = $em->getRepository(Article::class)->getLastArticlesSortedByDescCreatedAt();
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'last_articles' => $last_articles
+        $articles = $em->getRepository(Article::class)->getAllArticlesSortedByDescCreatedAt();
+        return $this->render('article/index.html.twig', [
+            'controller_name' => 'ArticleController',
+            'articles' => $articles
         ]);
     }
 }
