@@ -17,9 +17,31 @@ club:
   path: /club
   controller: App\Controller\ClubController::index
 login:
-    path: /login
-    controller: App\Controller\SecurityController::login
-    methods: GET|POST
+  path: /login
+  controller: App\Controller\SecurityController::login
+  methods: GET|POST
+registration:
+  path: /registration
+  controller: App\Controller\SecurityController::registration
+  methods: GET|POST
 logout:
-    path: /logout
-    controller: App\Controller\SecurityController::logout
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+profile:
+  path: /profil
+  controller: App\Controller\ProfileController::index
+admin_home:
+  path: /admin
+  controller: App\Controller\AdminController::home
+admin_articles:
+  path: /admin/articles
+  controller: App\Controller\AdminController::articles
+admin_entrainements:
+  path: /admin/entrainements
+  controller: App\Controller\AdminController::entrainements
+admin_users:
+  path: /admin/utilisateurs
+  controller: App\Controller\AdminController::users
+admin_users_edit:
+  path: /admin/utilisateurs/{id}/edit
+  controller: App\Controller\AdminController::editUser

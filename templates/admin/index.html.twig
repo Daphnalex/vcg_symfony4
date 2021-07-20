@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<div class="admin">
+    <h1>Administration</h1>
+    <div class="row mt-5">
+        <div class="col-md-3 p-4 white center">
+            <div class="mb-3">
+                <a href='/admin/utilisateurs'>GESTION DES UTILISATEURS</a>
+            </div>
+            <p>Administration des comptes utilisateurs. Les comptes utilisateurs seront ajoutés par l'administrateur. Ces comptes seront utilisés ultérieurement pour des évolutions futures (ajout de commentaires, pour la gestion des stocks, pour des inscriptions à des évènements).</p>
+        </div>
+        <div class="offset-md-1 col-md-3 p-4 white center">
+            <div class="mb-3">
+                <a href='/admin/articles'>GESTION DES ARTICLES</a>
+            </div>
+            <p>Les articles servent à informer le public sur les évènements du club. Ils se composent d'un titre, d'une image principale et d'un contenu texte enrichi.</p>
+        </div>
+        <div class="offset-md-1 col-md-3 p-4 white center">
+            <div class="mb-3">
+                <a href='/admin/entrainements'>GESTION DES ENTRAINEMENTS</a>
+            </div>
+            <p>Vous pouvez indiquer ici les dates d'entrainement à venir et les informations complémentaires (lieux d'entrainement,...).</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

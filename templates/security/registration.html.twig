@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}S'enregistrer{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class='col-12 p-4' style='background-color: white'>
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+        
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté comme {{ app.user.username }}, <a href="{{ path('logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
+        
+            <h1 class="h3 mb-3 font-weight-normal">Enregistrement</h1>
+            {{ form(form) }}
+            <div class="mt-4 center">
+                Déjà un compte ? 
+                <a href='/registration'>Se connecter</a>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}

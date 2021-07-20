@@ -19,6 +19,14 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function getAllUsers()
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->orderBy('user.lastname', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
@@ -47,4 +55,15 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getUser($id): ?User
+    {
+        return $this->createQueryBuilder('app_users')
+            ->andWhere('app_users.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
 }

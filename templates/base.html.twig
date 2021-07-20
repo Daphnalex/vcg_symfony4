@@ -33,9 +33,37 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/club">Le club</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Connexion</a>
-                </li>
+                {% if app.user %}
+                    {% for role in app.user.roles %}
+                        {% if (role == 'ROLE_ADMIN') %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="/admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administration
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="/admin/utilisateurs">Gestion des utilisateurs</a>
+                                    <a class="dropdown-item" href="/admin/articles">Gestion des articles</a>
+                                    <a class="dropdown-item" href="/admin/entrainements">Gestion des entrainements</a>
+                                </div>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mon compte
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/profil">Mon profil</a>
+                            <a class="dropdown-item" href="/logout">Déconnexion</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Connexion</a>
+                    </li>
+                {% endif %}
                 {#<li class="nav-item">
                     <a class="nav-link" href="/contact">Nous contacter</a>
                 </li>#}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un utilisateur{% endblock %}
+
+{% block body %}
+
+<div class="admin white p-2">
+    {% if user %}
+        <h1>Edition de l'utilisateur "{{user.username}}"</h1>
+    {% endif %}
+    <br/>
+    <div class="p-4">
+        {{ form(form) }}
+    </div>
+</div>
+{% endblock %}

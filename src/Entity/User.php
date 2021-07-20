@@ -22,6 +22,16 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
     private $username;
 
     /**
@@ -39,11 +49,27 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     public function __construct()
     {
         $this->isActive = true;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this -> id = $id;
+        return $this;
     }
 
     public function getUsername()
@@ -54,6 +80,28 @@ class User implements UserInterface, \Serializable
     public function setUsername($username)
     {
         $this -> username = $username;
+        return $this;
+    }
+
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname($firstname)
+    {
+        $this -> firstname = $firstname;
+        return $this;
+    }
+
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname($lastname)
+    {
+        $this -> lastname = $lastname;
         return $this;
     }
 
@@ -74,12 +122,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-
     public function getEmail()
     {
         return $this->email;
@@ -89,6 +131,21 @@ class User implements UserInterface, \Serializable
     public function setEmail($email)
     {
         $this -> email = $email;
+        return $this;
+    }
+
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles($roles)
+    {
+        $this -> roles = $roles;
         return $this;
     }
 
