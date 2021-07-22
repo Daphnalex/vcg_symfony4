@@ -4,7 +4,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
     encoders:
         # use your user class name here
         App\Entity\User:
@@ -24,6 +24,9 @@ security:
                 default_target_path: /profil
             logout:
                 path: logout
+            guard:
+                authenticators:
+                    - App\Security\UsersAuthenticator
                 # where to redirect after logout
                 # target: app_any_route
 

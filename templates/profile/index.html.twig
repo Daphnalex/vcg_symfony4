@@ -3,23 +3,26 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-    <h1>Profil</h1>
+    <h1>Profil de {{app.user.getFirstname()}} {{app.user.getLastname()}} </h1>
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="p-3 admin white mt-3">
-         <form method="POST">
-            <label for="inputUsername" class="bold">Nom d'utilisateur :</label> {{ currentUser.getUsername() }}
-            <br/>
-            <label for="inputFirstname" class="bold">Prénom :</label> {{ currentUser.getFirstname() }}
-            <br/>
-            <label for="inputLastname" class="bold">Nom : </label> {{ currentUser.getLastname() }}
-            <br/> 
-            <label for="inputEmail" class="bold">Email :</label>
-            <input type="text" value={{ currentUser.getEmail() }} name="_email" id="inputEmail" class="form-control" required autofocus>
-            <div class="center mt-3">
-                <button class="btn btn-success" type="submit">Enregistrer les modifications</button>
-            
-            </div>
-        </form>
-         <br/>
-         <p><a href="">Changer mot de passe</a></p>
+        <div><span class="bold">Nom d'utilisateur : </span>{{ app.user.getUsername() }}</div>
+        <br/>
+        <div><span class="bold">Nom : </span>{{ app.user.getLastname() }}</div>
+        <br/>
+        <div><span class="bold">Prénom : </span>{{ app.user.getFirstname() }}</div>
+        <br/>
+        <div><span class="bold">Email : </span>{{ app.user.getEmail() }}</div>
+        <br/>
+        <br/>
+         <div>
+            <p><a href="/profil/edit">Modifier le profil</a></p>
+            <p><a href="/profil/edit_pass">Modifier le mot de passe</a></p>
+         </div>
+         
     </div>
 {% endblock %}

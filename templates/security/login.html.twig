@@ -22,25 +22,22 @@
             {% endif %}
         
             <h1 class="h3 mb-3 font-weight-normal">Authentification</h1>
-            <label for="inputUsername">Username</label>
-            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" required autofocus>
-            <label class="mt-4" for="inputPassword">Mot de passe</label>
-            <input type="password" name="_password" id="inputPassword" class="form-control" required>
-        
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+            <br/>
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" required>
+
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
             >
-        
-            {#
-                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                See https://symfony.com/doc/current/security/remember_me.html
-        
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
-                    </label>
-                </div>
-            #}
+            <br/>
+            {#<div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>#}
+
             <div class="center mt-4 mb-4">
                 <button class="btn btn-primary" type="submit">
                     Se connecter
@@ -49,7 +46,9 @@
             <div class="mt-4 center">
                 <a href='/inscription'>S'enregistrer</a>
             </div>
-            
+            <div class="mt-4 center">
+                <a href='/mot-de-passe-oublie'>Mot de passe oublié</a>
+            </div>
         </form>
     </div>
 </div>
