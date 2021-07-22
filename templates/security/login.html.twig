@@ -3,6 +3,11 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
+{% for message in app.flashes('message') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 <div class="row">
     <div class='col-12 p-4' style='background-color: white'>
         <form method="post">
@@ -42,7 +47,7 @@
                 </button>
             </div>
             <div class="mt-4 center">
-                <a href='/registration'>S'enregistrer</a>
+                <a href='/inscription'>S'enregistrer</a>
             </div>
             
         </form>

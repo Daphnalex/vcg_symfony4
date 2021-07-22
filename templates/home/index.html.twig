@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block body %}
-
+{% for message in app.flashes('message') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 <div class="home_news p-3">
     <h1>Les dernières actualités du club</h1>
     <div class="row mt-4">

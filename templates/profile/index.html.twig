@@ -3,8 +3,23 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-
-<div class="admin">
     <h1>Profil</h1>
-</div>
+    <div class="p-3 admin white mt-3">
+         <form method="POST">
+            <label for="inputUsername" class="bold">Nom d'utilisateur :</label> {{ currentUser.getUsername() }}
+            <br/>
+            <label for="inputFirstname" class="bold">Prénom :</label> {{ currentUser.getFirstname() }}
+            <br/>
+            <label for="inputLastname" class="bold">Nom : </label> {{ currentUser.getLastname() }}
+            <br/> 
+            <label for="inputEmail" class="bold">Email :</label>
+            <input type="text" value={{ currentUser.getEmail() }} name="_email" id="inputEmail" class="form-control" required autofocus>
+            <div class="center mt-3">
+                <button class="btn btn-success" type="submit">Enregistrer les modifications</button>
+            
+            </div>
+        </form>
+         <br/>
+         <p><a href="">Changer mot de passe</a></p>
+    </div>
 {% endblock %}

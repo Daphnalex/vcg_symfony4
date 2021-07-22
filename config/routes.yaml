@@ -21,7 +21,7 @@ login:
   controller: App\Controller\SecurityController::login
   methods: GET|POST
 registration:
-  path: /registration
+  path: /inscription
   controller: App\Controller\SecurityController::registration
   methods: GET|POST
 logout:
@@ -45,3 +45,6 @@ admin_users:
 admin_users_edit:
   path: /admin/utilisateurs/{id}/edit
   controller: App\Controller\AdminController::editUser
+app_verify_email:
+  path: /verify_email
+  controller: App\Controller\SecurityController::verifyUserEmail

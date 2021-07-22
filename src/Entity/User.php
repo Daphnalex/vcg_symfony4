@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Repository\UserRepository;
 
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface, \Serializable
 {
@@ -20,12 +22,12 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25)
      */
     private $lastname;
 
@@ -47,16 +49,26 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = false;
 
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="users", orphanRemoval=true)
+     */
+    private $articles;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activation_token;
+    
     public function __construct()
     {
-        $this->isActive = true;
+        $this->isActive = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -175,5 +187,29 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
+    }
+
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
     }
 }

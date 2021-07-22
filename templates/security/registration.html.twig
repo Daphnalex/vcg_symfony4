@@ -9,7 +9,9 @@
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
-        
+            {% if email_exist %}
+                <div class="alert alert-danger">Cette adresse mail existe déjà.</div>
+            {% endif %}
             {% if app.user %}
                 <div class="mb-3">
                     Vous êtes connecté comme {{ app.user.username }}, <a href="{{ path('logout') }}">Se déconnecter</a>
@@ -20,7 +22,7 @@
             {{ form(form) }}
             <div class="mt-4 center">
                 Déjà un compte ? 
-                <a href='/registration'>Se connecter</a>
+                <a href='/login'>Se connecter</a>
             </div>
             
         </form>

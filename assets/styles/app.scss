@@ -51,7 +51,19 @@ body {
         text-align: center;
     }
 
+    .right {
+        text-align: right;
+    }
+
+    .left {
+        text-align: left;
+    }
+
     .white {
         background-color: $white;
+    }
+
+    .bold {
+        font-weight: bold;
     }
 }
