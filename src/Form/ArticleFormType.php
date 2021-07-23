@@ -21,7 +21,7 @@ class ArticleFormType extends AbstractType
                 'label' => 'Titre',
                 'attr' =>  ['class' => 'form-control', 'placeholder' => 'Saisir un titre pour l\'article...']
             ])
-            ->add('image', TextType::class,
+            ->add('image', FileType::class,
                 [
                     'label' => 'Choisissez votre fichier'
                 ]

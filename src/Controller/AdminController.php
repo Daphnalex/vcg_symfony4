@@ -9,14 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Entity\User;
 use App\Entity\Article;
 use App\Form\ArticleFormType;
 
 class AdminController extends AbstractController
 {
+            
     /**
      * @Route("/admin", name="admin")
      * @Security("has_role('ROLE_ADMIN')")
@@ -100,7 +99,7 @@ class AdminController extends AbstractController
         $articles = $em->getRepository(Article::class)->getAllArticlesSortedByDescCreatedAt();
         
         return $this->render('admin/articles/index.html.twig', [
-                'articles' => $articles
+                'articles' => $articles,
             ]);
         
     }
@@ -118,9 +117,15 @@ class AdminController extends AbstractController
         $form -> handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
+            $file = $article->getImage();
+            $fileName = 'uploads/images/'.md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $fileName);
+            
+            $article->setImage($fileName);
             $em = $this -> getDoctrine() -> getManager();
             $em->persist($article);
             $em->flush();
+            
 
             return $this->redirectToRoute('admin_articles_list');
         }

@@ -6,11 +6,9 @@ use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
- * @Vich\Uploadable
  */
 class Article
 {
@@ -31,12 +29,6 @@ class Article
      * @var string
      */
     private $image;
-
-    /**
-     * @Vich\UploadableField(mapping="featured_images", fileNameProperty="image")
-     * @var File
-     */
-    private $imageFile;
 
     /**
      * @ORM\Column(type="text")
@@ -86,30 +78,16 @@ class Article
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 
         return $this;
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile(File $imageFile = null)
-    {
-        $this->imageFile = $imageFile;
-
-        if ($imageFile) {
-            $this->updatedAt = new \DateTime('now');
-        }
     }
 
     public function getContent(): ?string
