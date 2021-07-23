@@ -48,6 +48,14 @@ class ArticleRepository extends ServiceEntityRepository
     }
     */
 
+    public function getArticleById($id): ?Article
+    {
+        return $this->createQueryBuilder('article')
+            ->andWhere('article.id = ' .$id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function getAllArticlesSortedByDescCreatedAt()
     {
         $qb = $this->createQueryBuilder('article')

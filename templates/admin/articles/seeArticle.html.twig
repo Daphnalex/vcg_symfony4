@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administrer un article{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    {{ include('admin/baseAdmin.html.twig') }}
+
+    <div class="col-md-8 white p-4">
+        <h2>Administrer un article</h2>
+        <div class="right">
+            <button class="btn btn-info"><a href='/admin/articles/{{article.id}}/edit'>Modifier</a></button>
+            <button class="btn btn-danger"><a href='/admin/articles/{{article.id}}/suppr'>Supprimer</a></button>
+            {#
+            <button class="btn btn-success"><a href='/admin/articles/ajout'>Publier</a></button>
+            #}
+        </div>
+        <div class="row p-3 mt-2">
+            <div class="col-sm-12">
+                <div class="card p-3 white">
+                    <div class="card-title">
+                        <label class="bold">Résumé de l'article :</label>
+                    </div>
+                    <div class="card-body">
+                        {{article.getResume()}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-3">
+                <label class="bold">Aperçu de l'article : </label>
+                <div class="row-fluid mt-2">
+                    <article class="card white">
+                        <div class="row-fluid right mb-2">
+                            <small><i>Ecrit le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}
+                                    {% if article.category %}} dans la catégorie {{article.category }} {% endif %}</i>
+                            </small>
+                        </div>
+                        <h2>{{article.title}}</h2>
+                        <div class="row-fluid mt-3 mb-3">
+                            <div class="offset-lg-2 col-lg-6 col-sm-12">
+                                <img style='width: 100%' src={{article.image}} alt="image de l'article '{{article.title}}'"/>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <p>{{article.content | raw}}</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-6 main_article">
             <h3>{{last_articles[0].title}}</h3>
-            <p>{{last_articles[0].content}}</p>
+            <p>{{last_articles[0].resume}}</p>
         </div>
     </div>
     {% for article in last_articles|slice(1) %} 
@@ -31,7 +31,7 @@
         </div>
         <div class="col-md-10">
             <h5>{{article.title}}</h5>
-            <p>{{article.content}}</p>
+            <p>{{article.resume}}</p>
         </div>
     </div>
     <hr style='color: grey'/>

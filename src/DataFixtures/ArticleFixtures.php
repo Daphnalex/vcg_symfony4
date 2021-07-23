@@ -21,7 +21,9 @@ class ArticleFixtures extends Fixture
             $article->setTitle($this->faker->title);
             $article->setImage($this->faker->imageUrl($width = 640, $height = 480));
             $article->setContent($this->faker->text);
+            $article->setResume($this->faker->text);
             $article->setCreatedAt($this->faker->dateTimeThisYear($max = 'now', $timezone = null));
+            $article->setUpdatedAt($this->faker->dateTimeThisYear($max = 'now', $timezone = null));
             $manager->persist($article);
         }
         $manager->flush();

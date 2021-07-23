@@ -17,7 +17,9 @@ body {
     }
 
     h2 {
+        color: #32AAE1;
         text-align: center;
+        font-size: 22px;
     }
 
     background-color: #32AAE1;
@@ -66,4 +68,22 @@ body {
     .bold {
         font-weight: bold;
     }
+
+    button > a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .btn.btn-info {
+        background-color: yellow;
+    }
+
+    .btn.btn-success a{
+        color: white;
+    }
+
+    .wrapper {
+        background-color: #f1f0f1;
+    }
+
 }

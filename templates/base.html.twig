@@ -36,15 +36,10 @@
                 {% if app.user %}
                     {% for role in app.user.roles %}
                         {% if (role == 'ROLE_ADMIN') %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="/admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/utilisateurs" id="navbarDropdownMenuLink">
                                     Administration
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/admin/utilisateurs">Gestion des utilisateurs</a>
-                                    <a class="dropdown-item" href="/admin/articles">Gestion des articles</a>
-                                    <a class="dropdown-item" href="/admin/entrainements">Gestion des entrainements</a>
-                                </div>
                             </li>
                         {% endif %}
                     {% endfor %}

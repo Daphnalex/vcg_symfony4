@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un article{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    {{ include('admin/baseAdmin.html.twig') }}
+
+    <div class="col-md-8 white p-4">
+        <h2>Confirmation de suppression</h2>
+        <br/>
+        <p>Êtes vous sûr de vouloir supprimer l'article "{{article.title}}" ?</p>
+        <i style="color: red">Attention toute action de suppression est irréversible !</i>
+        <br/>
+        <div class="row mt-3">
+            <div class="offset-2 col-md-4">
+                {{form(form)}}
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-success"><a href="/admin/articles/{{article.id}}">Annuler</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

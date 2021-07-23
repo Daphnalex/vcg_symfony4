@@ -9,12 +9,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Entity\User;
+use App\Entity\Article;
+use App\Form\ArticleFormType;
 
 class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function home()
     {
@@ -25,6 +30,7 @@ class AdminController extends AbstractController
     }
     /**
      * @Route("/admin/utilisateurs", name="admin_users")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function users()
     {
@@ -85,39 +91,109 @@ class AdminController extends AbstractController
         
     }
     /**
-     * @Route("/admin/articles", name="admin_articles")
+     * @Route("/admin/articles", name="admin_articles_list")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function articles()
     {
+        $em = $this -> getDoctrine() -> getManager();
+        $articles = $em->getRepository(Article::class)->getAllArticlesSortedByDescCreatedAt();
+        
         return $this->render('admin/articles/index.html.twig', [
-            
+                'articles' => $articles
             ]);
         
     }
-    /**
-     * @Route("/admin/articles/nouveau", name="admin_articles_new")
-     */
-    public function addArticle()
-    {
 
-        
+    /**
+     * @Route("/admin/articles/ajout", name="admin_articles_new")
+     */
+    public function addArticle(Request $request)
+    {
+        //on instancie l'entité article
+        $article = new Article();
+
+        //on créait l'objet formulaire
+        $form = $this -> createForm(ArticleFormType::class,$article);
+        $form -> handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this -> getDoctrine() -> getManager();
+            $em->persist($article);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_articles_list');
+        }
+        return $this->render('admin/articles/addArticle.html.twig', [
+            'form' => $form -> createView()
+        ]);
     }
-    /**
-     * @Route("/admin/articles/{id}/edit", name="admin_articles_edit")
-     */
-    public function editArticle()
-    {
 
+    /**
+     * @Route("/admin/articles/{id}", name="admin_article")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function articleById($id)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $article = $em->getRepository(Article::class)->getArticleById($id);
+        
+        return $this->render('admin/articles/seeArticle.html.twig', [
+                'article' => $article
+            ]);
         
     }
     
     /**
-     * @Route("/admin/articles/{id}", name="admin_article")
+     * @Route("/admin/articles/{id}/edit", name="admin_articles_edit")
      */
-    public function article()
+    public function editArticle($id, Request $request)
     {
+        $em = $this -> getDoctrine() -> getManager();
+        $article = $em->getRepository(Article::class)->getArticleById($id);
+        $form = $this -> createForm(ArticleFormType::class,$article);
+        $form -> handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this -> getDoctrine() -> getManager();
+            $em->persist($article);
+            $em->flush();
 
+            return $this->redirectToRoute('admin_articles_list');
+        }
+        return $this->render('admin/articles/addArticle.html.twig', [
+            'form' => $form -> createView(),
+            'article' => $article
+        ]);
         
+    }
+    /**
+     * @Route("/admin/articles/{id}/suppr", name="admin_articles_suppr")
+     */
+    public function deleteArticle($id, Request $request)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        // on récupère l'article
+        $article = $em->getRepository(Article::class)->getArticleById($id);
+        // on créait le formulaire
+        $form = $this->createFormBuilder($article)
+            -> add('Confirmer suppression', SubmitType::class, [
+                'attr'=>['class' => 'btn-danger']
+            ])
+            ->getForm();
+        // validation du formulaire
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em->remove($article);
+            $em->flush();
+            $this->addFlash('message', 'Votre article a bien été supprimé');
+            return $this->redirectToRoute('admin_articles_list');
+        }
+        return $this->render('admin/articles/deleteArticle.html.twig', [
+            'article' => $article,
+            'form' => $form -> createView()
+        ]);
     }
 
     /**
