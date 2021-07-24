@@ -11,7 +11,7 @@ use App\Entity\Article;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/articles", name="articles")
      */
     public function index(): Response
     {
@@ -22,6 +22,19 @@ class ArticleController extends AbstractController
             'controller_name' => 'ArticleController',
             'articles' => $articles
         ]);
+    }
+    /**
+     * @Route("/articles/{id}", name="article_by_id")
+     */
+    public function articleById($id)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $article = $em->getRepository(Article::class)->getArticleById($id);
+        
+        return $this->render('/article/seeArticle.html.twig', [
+                'article' => $article
+            ]);
+        
     }
 
 }

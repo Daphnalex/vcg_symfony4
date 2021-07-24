@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des articles{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    {{ include('admin/baseAdmin.html.twig') }}
+
+    <div class="col-md-8 white p-4">
+        <div class="row white mt-3 p-3">
+            <h2>Configuration du site :</h2>
+            <div class="col-12 mt-2">
+                {{form(form)}}
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

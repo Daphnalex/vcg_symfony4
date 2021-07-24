@@ -22,23 +22,34 @@
         <div class="col-md-6 main_article">
             <h3>{{last_articles[0].title}}</h3>
             <p>{{last_articles[0].resume}}</p>
+            <div style="bottom: 0; width: 100%; position: absolute" class="center">
+                <button type="button" class="btn btn-primary">
+                    <a href='/articles/{{last_articles[0].id}}' style='color: white'>Lire l'article</a>
+                </button>
+            </div>
         </div>
     </div>
+    <hr>
     {% for article in last_articles|slice(1) %} 
     <div class="row mt-4">
         <div class="col-md-2">
             <img style='width: 100%' src="{{article.image}}" alt="image de l'article {{article.title}}"/>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8">
             <h5>{{article.title}}</h5>
             <p>{{article.resume}}</p>
+        </div>
+        <div class='col-md-2' style='text-align: center; padding-top: 20px'>
+            <button type="button" class="btn btn-primary">
+                <a href='/articles/{{article.id}}' style='color: white'>Lire l'article</a>
+            </button>
         </div>
     </div>
     <hr style='color: grey'/>
     {% endfor %}
     <div class="center">
         <button type="button" class="btn btn-primary">
-            <a href='/articles' style='color: white'>Voir les articles</a>
+            <a href='/articles' style='color: white'>Voir tous les articles</a>
         </button>
     </div>
 </div>

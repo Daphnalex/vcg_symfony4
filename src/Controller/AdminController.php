@@ -9,9 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\MainImage;
 use App\Form\ArticleFormType;
+use App\Form\MainImageFormType;
 
 class AdminController extends AbstractController
 {
@@ -20,11 +23,30 @@ class AdminController extends AbstractController
      * @Route("/admin", name="admin")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function home()
+    public function home(Request $request)
     {
+        //on instancie l'entité mainImage
+        $mainImage = new MainImage();
 
+        $form = $this->createFormBuilder($mainImage)
+            ->add('name', FileType::class, [
+                'label' => 'Image principale'
+            ])
+            ->add('Enregistrer', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $file = $mainImage->getName();
+            $fileName = 'uploads/images/mainImage.png';
+            $file->move($this->getParameter('upload_directory'), $fileName);
+
+            return $this->redirectToRoute('admin');
+        }
         return $this->render('admin/index.html.twig', [
-            
+            'form' => $form -> createView()
         ]);
     }
     /**

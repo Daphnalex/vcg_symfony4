@@ -36,10 +36,12 @@
                 {% if app.user %}
                     {% for role in app.user.roles %}
                         {% if (role == 'ROLE_ADMIN') %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/utilisateurs" id="navbarDropdownMenuLink">
-                                    Administration
-                                </a>
+                            <li class="nav-item" style="position: absolute; right: 0; margin-right: 20px;">
+                                <button class="btn btn-primary p-0">
+                                    <a class="nav-link" style='color:white;' href="/admin/utilisateurs" id="navbarDropdownMenuLink">
+                                        Administration
+                                    </a>
+                                </button>
                             </li>
                         {% endif %}
                     {% endfor %}

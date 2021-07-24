@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{article.title}}{% endblock %}
+
+{% block body %}
+
+<div class="news">
+    <article>
+        <div class="row-fluid float-right mb-2">
+            <small><i>Ecrit le {{article.createdAt | date('d/m/Y')}} à {{article.createdAt | date('H:i')}}
+                    {% if article.category %}} dans la catégorie {{article.category }} {% endif %}</i>
+            </small>
+        </div>
+        <h2>{{article.title}}</h2>
+        <div class="row-fluid mt-3 mb-3">
+            <div class="offset-2 col-lg-6 col-sm-12">
+                <img src="{{asset(article.image)}}" alt="image de l'article {{article.title}}">
+            </div>
+        </div>
+        <div class="row-fluid">
+            <p>{{article.content|raw}}</p>
+        </div>
+    </article>
+</div>
+{% endblock %}
