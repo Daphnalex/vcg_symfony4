@@ -11,6 +11,12 @@
         <div class="row white mt-3 p-3">
             <h2>Configuration du site :</h2>
             <div class="col-12 mt-2">
+                <label class="bold">Image principale :</label>
+                {% if mainImageExist %}
+                <img style="width:100%" class="mb-3" src="{{asset('uploads/images/mainImage.png')}}" alt="Image principale du club">
+                {% else %}
+                <p>Aucune image principale importé.</p>
+                {% endif %}
                 {{form(form)}}
             </div>
             

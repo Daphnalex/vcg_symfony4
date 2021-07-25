@@ -14,7 +14,7 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\MainImage;
 use App\Form\ArticleFormType;
-use App\Form\MainImageFormType;
+use Symfony\Component\Filesystem\Filesystem;
 
 class AdminController extends AbstractController
 {
@@ -28,9 +28,12 @@ class AdminController extends AbstractController
         //on instancie l'entité mainImage
         $mainImage = new MainImage();
 
+        $filesystem = new Filesystem();
+        
+        $fileSystemExist = $filesystem->exists('uploads/images/mainImage.png');
         $form = $this->createFormBuilder($mainImage)
             ->add('name', FileType::class, [
-                'label' => 'Image principale'
+                'label' => 'Importer une nouvelle image :'
             ])
             ->add('Enregistrer', SubmitType::class)
             ->getForm();
@@ -46,7 +49,8 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('admin');
         }
         return $this->render('admin/index.html.twig', [
-            'form' => $form -> createView()
+            'form' => $form -> createView(),
+            'mainImageExist' => $fileSystemExist
         ]);
     }
     /**
