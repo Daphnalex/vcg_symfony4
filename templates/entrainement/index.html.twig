@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EntrainementController!{% endblock %}
+{% block title %}Les entrainements{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,14 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/33687/Documents/projets/vcg_website/src/Controller/EntrainementController.php'|file_link(0) }}">src/Controller/EntrainementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/33687/Documents/projets/vcg_website/templates/entrainement/index.html.twig'|file_link(0) }}">templates/entrainement/index.html.twig</a></code></li>
-    </ul>
+<div class="entrainement">
+    <h1>Les horaires d'entrainements</h1>
+    <div class="row-fluid mt-4 white p-3">
+        {% if entrainement %}
+            <p>{{entrainement.content|raw}}</p>
+        {% else %}
+            <p>Les horaires d'entrainement n'ont pas encore été créés.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

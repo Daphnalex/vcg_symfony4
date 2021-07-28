@@ -12,8 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\Club;
+use App\Entity\Entrainement;
 use App\Entity\MainImage;
 use App\Form\ArticleFormType;
+use App\Form\ClubFormType;
+use App\Form\EntrainementFormType;
 use Symfony\Component\Filesystem\Filesystem;
 
 class AdminController extends AbstractController
@@ -228,12 +232,67 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/entrainements", name="admin_entrainements")
+     * @Route("/admin/entrainements/edit", name="admin_entrainements_edit")
      */
-    public function entrainements()
+    public function entrainements(Request $request)
     {
+        $newEntrainement = false;
+        $em = $this -> getDoctrine() -> getManager();
+        //on récupère le contenu de la page entrainement
+        $entrainement = $em->getRepository(Entrainement::class)->getFirstEntrainement();
+        if (!$entrainement) {
+            $newEntrainement = true;
+            $entrainement = new Entrainement();
+        }
+        //On créait le formulaire
+        $form = $this->createForm(EntrainementFormType::class, $entrainement);
+        $form -> handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($entrainement);
+                $em->flush();
+            if ($newEntrainement) {
+                $this->addFlash('message', 'Vos horaires d\'entrainement ont bien été ajouté');
+            } else {
+                $this->addFlash('message', 'Votre page entrainement a bien été mis à jour'); 
+            }
+            return $this->redirectToRoute('entrainement');
+        }
         return $this->render('admin/entrainements/index.html.twig', [
-            
+                'form' => $form->createView(),
+                'entrainement' => $entrainement
+            ]);
+        
+    }
+
+    /**
+     * @Route("/admin/club/edit", name="admin_club_edit")
+     */
+    public function club(Request $request)
+    {
+        $newDescription = false;
+        $em = $this -> getDoctrine() -> getManager();
+        //on récupère le contenu de la page entrainement
+        $club = $em->getRepository(Club::class)->getFirstElement();
+        if (!$club) {
+            $newDescription = true;
+            $club = new Club();
+        }
+        //On créait le formulaire
+        $form = $this->createForm(ClubFormType::class, $club);
+        $form -> handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($club);
+                $em->flush();
+            if ($newDescription) {
+                $this->addFlash('message', 'Votre description a bien été ajouté');
+            } else {
+                $this->addFlash('message', 'Votre description a bien été mise à jour'); 
+            }
+            return $this->redirectToRoute('club');
+        }
+        return $this->render('admin/club/index.html.twig', [
+                'form' => $form->createView(),
+                'club' => $club
             ]);
         
     }

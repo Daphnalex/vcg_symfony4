@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClubController!{% endblock %}
+{% block title %}Le club{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,14 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/33687/Documents/projets/vcg_website/src/Controller/ClubController.php'|file_link(0) }}">src/Controller/ClubController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/33687/Documents/projets/vcg_website/templates/club/index.html.twig'|file_link(0) }}">templates/club/index.html.twig</a></code></li>
-    </ul>
+<div class="club">
+    <h1>Présentation du club</h1>
+    <div class="row-fluid mt-4 white p-3">
+        {% if club %}
+            <p>{{club.presentation|raw}}</p>
+        {% else %}
+            <p>Il n'y a pas encore de présentation.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
