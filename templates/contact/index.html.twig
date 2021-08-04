@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('message') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+<div class="contact p-3">
+    <h1>Nous contacter</h1>
+    <div class="offset-3 col-6 mt-3 p-3">
+        {{form(contactForm)}}
+    </div>
+    
+</div>
+{% endblock %}
