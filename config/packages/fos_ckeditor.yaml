@@ -6,6 +6,6 @@ twig:
 fos_ck_editor:
     configs:
         my_config:
-            toolbar: standard
+            toolbar: full
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []

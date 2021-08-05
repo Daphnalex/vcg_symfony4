@@ -2,6 +2,10 @@
 
 {% block title %}{{article.title}}{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
 {% block body %}
 
 <div class="news">
@@ -11,6 +15,7 @@
                     {% if article.category %}} dans la catégorie {{article.category }} {% endif %}</i>
             </small>
         </div>
+        <br/>
         <h2>{{article.title}}</h2>
         <div class="row-fluid mt-3 mb-3">
             <div class="offset-2 col-lg-6 col-sm-12">
@@ -21,5 +26,50 @@
             <p>{{article.content|raw}}</p>
         </div>
     </article>
+    <div class="row-fluid wrapper border-yellow p-3">
+        <h2>Liste des commentaires</h2>
+        <hr>
+        <div class="col-12 mt-3 mb-3">
+            {% if article.comments|length == 0 %}
+                <p>Pas encore de commentaires.</p>
+            {% else %}
+                {% for comment in article.comments %}
+                    {% if comment.parent == null %}
+                        <p><i>Publié par <b>{{comment.nickname}}</b> le {{comment.createdAt|date("d/m/Y H:i")}}</i></p>
+                        <div>{{comment.content}}</div>
+                        <div class="right"><button class="btn btn-primary"><a style="color: white" href="#add-comments" data-reply data-id="{{comment.id}}">Répondre</a></button></div>
+                        <div class="replies pl-5">
+                            <hr class="dotted"/>
+                            {# on affiche les réponses #}
+                            {% for reply in comment.replies %}
+                                <p><i>Réponse publié par {{reply.nickname}} le {{reply.createdAt|date("d/m/Y H:i")}}</i></p>
+                                <div>{{reply.content}}</div>
+                            {% endfor %}
+                        </div>
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div id="add-comments" class="row-fluid p-5 card mt-2 wrapper">
+        <h2>Ajouter un commentaire</h2>
+        {{form(commentForm)}}
+    </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            //écouteur d'évènements sur les boutons "Répondre"
+            document.querySelectorAll("[data-reply]").forEach((element) => {
+                element.addEventListener('click', function(){
+                    console.log("this",this);
+                    document.getElementById('comments_parentid').value = this.dataset.id;
+                    console.log('document.getElementById("comments_parentid")', document.getElementById('comments_parentid'));
+                });
+            });
+        }
+    </script>
 {% endblock %}

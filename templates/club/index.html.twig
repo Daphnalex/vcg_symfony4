@@ -9,13 +9,13 @@
 </style>
 
 <div class="club">
-    <h1>Présentation du club</h1>
-    <div class="row-fluid mt-4 white p-3">
-        {% if club %}
-            <p>{{club.presentation|raw}}</p>
-        {% else %}
-            <p>Il n'y a pas encore de présentation.</p>
-        {% endif %}
+    <h1>Le club</h1>
+    <div class="row-fluid mt-4 white pt-3 pb-3 pr-5 pl-5">
+            {% if club %}
+                <p>{{club.presentation|raw}}</p>
+            {% else %}
+                <p>Il n'y a pas encore de présentation.</p>
+            {% endif %}
     </div>
 </div>
 {% endblock %}

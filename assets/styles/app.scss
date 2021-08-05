@@ -86,4 +86,19 @@ body {
         background-color: #f1f0f1;
     }
 
+    .border-blue {
+        border: 1px solid #32AAE1 !important;
+    }
+
+    .border-yellow {
+        border: 5px solid #fadd00;
+    }
+
+    .dotted {
+        border-top:2px dotted rgba(0, 0, 0, 0.1);
+    }
+
+    .replies {
+        color: grey;
+    }
 }
