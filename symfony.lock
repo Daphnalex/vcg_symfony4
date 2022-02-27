@@ -111,9 +111,6 @@
             "./config/packages/fos_ckeditor.yaml"
         ]
     },
-    "fzaninotto/faker": {
-        "version": "v1.9.1"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v3.0.5"
     },
@@ -201,6 +198,18 @@
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.7"
+    },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "9d254a22efca7264203eea98b866f16f944b2f09"
+        },
+        "files": [
+            "./public/.htaccess"
+        ]
     },
     "symfony/asset": {
         "version": "v4.4.17"
