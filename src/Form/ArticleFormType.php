@@ -23,7 +23,8 @@ class ArticleFormType extends AbstractType
             ])
             ->add('image', FileType::class,
                 [
-                    'label' => 'Choisissez votre fichier'
+                    'data_class' => null,
+                    'label' => 'Image principale de l\'article'
                 ]
             )
             ->add('content', CKEditorType::class, [

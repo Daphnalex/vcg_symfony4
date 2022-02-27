@@ -13,19 +13,19 @@
         {{ message }}
     </div>
 {% endfor %}
-<div class="row mb-4 p-3">
+<div class="row p-3">
     {% if mainImageExist %}
     <img src="{{asset('uploads/images/mainImage.png')}}" style='width:100%;' alt='Image principale'/>
     {% endif %}
 </div>
-<div class="home_news p-3">
-    <h1>Les dernières actualités</h1>
+<div class="home_news p-3 d-sm-none d-md-none d-lg-block">
+    <h4>Les dernières actualités</h4>
     {% if last_articles|length > 0 %}
     <div class="row mt-4">
-        <div class="col-md-6">
+        <div class="col-sm-12 col-lg-6">
             <img style='width: 100%' src="{{last_articles[0].image}}" alt="image de l'article {{last_articles[0].title}}"/>
         </div>
-        <div class="col-md-6 main_article">
+        <div class="col-sm-12 col-lg-6 main_article">
             <h3>{{last_articles[0].title}}</h3>
             <p>{{last_articles[0].resume}}</p>
             <div style="bottom: 0; width: 100%; position: absolute" class="center">
@@ -39,14 +39,14 @@
     {% endif %}
     {% for article in last_articles|slice(1) %} 
     <div class="row mt-4">
-        <div class="col-md-2">
+        <div class="col-sm-2">
             <img style='width: 100%' src="{{article.image}}" alt="image de l'article {{article.title}}"/>
         </div>
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <h5>{{article.title}}</h5>
             <p>{{article.resume}}</p>
         </div>
-        <div class='col-md-2' style='text-align: center; padding-top: 20px'>
+        <div class='col-sm-2' style='text-align: center; padding-top: 20px'>
             <button type="button" class="btn btn-primary">
                 <a href='/articles/{{article.id}}' style='color: white'>Lire l'article</a>
             </button>
@@ -66,4 +66,74 @@
     <p><i>Aucun article publié pour le moment.</i></p>
     {% endif %}
 </div>
+
+<div class="home-news p-3 d-lg-none d-sm-block d-md-block">
+    <h1>Les dernières actualités</h1>
+    <div class="row">
+        {% for article in last_articles %}
+            <div class="col-sm-6 mt-4">
+                <a href='/articles/{{article.id}}' style='text-decoration: none; color: inherit;'>
+                    <div class="card">
+                        <img class="card-img-top" src="{{article.image}}" alt="image de l'article {{article.title}}">
+                        <div class="card-body">
+                            <h3 class="card-title">{{article.title}}</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    /*<script>
+        window.onload = () => {
+            //écouteur d'évènements sur les boutons "Répondre"
+            let maxHeight = 0;
+            document.querySelectorAll(".card").forEach(function(element){
+                if (maxHeight < element.offsetHeight){
+                    maxHeight = element.offsetHeight;
+                }
+            });
+            document.querySelectorAll(".card").forEach(function(element){
+                element.style.paddingBottom = `${maxHeight - element.offsetHeight}px`;
+                
+            });
+            console.log("en écoute")
+            document.querySelectorAll('.navbar-toggler-icon').forEach(element => {
+                
+                element.addEventListener('click', function(){
+                    
+                    let container = document.querySelector('.navbar-collapse');
+                    if (container.classList.contains('show')){
+                        
+                        container.classList.remove('show');
+                        container.classList.add('remove');
+                    } else {
+                        
+                        container.classList.add('show');
+                        container.classList.remove('remove');
+                    }
+                    
+                });
+            });
+        }
+        const toggle = document.querySelector(".nav-item.dropdown");
+        const menu = document.querySelector(".dropdown-menu");
+        if (toggle){
+            toggle.addEventListener('click', (e) => {
+            if (toggle.classList.contains('show')){
+                toggle.classList.remove('show');
+                menu.classList.remove('show');
+            } else {
+                toggle.classList.add('show');
+                menu.classList.add('show');
+            }
+            
+        });
+        }
+        
+    </script>*/
+    
 {% endblock %}

@@ -4,101 +4,214 @@
 
 html {
     background-color: #32AAE1;
+    font-family: 'Open-Sans';
 }
 
-body {
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    body {
+        font-size: 2rem !important;
+    }
+
+    nav {
+        font-size: 2rem !important;
+        height: 130px !important;
+    }
+
+    nav > div > button {
+        height: 80px !important;
+        width: 80px !important;
+        margin-right: -20px;
+    }
+    .navbar-toggler-icon {
+        height: 50px !important;
+        width: 50px !important;
+    }
 
     h1 {
-        margin: 10px 10px 0px 40px;
-        font-size: 2rem;
-        font-family: 'Open-Sans';
-        padding: 10px;
-        border-left: 10px solid #fadd00;
+        font-size: 2.5rem !important;
+        color: white !important;
+        margin-top: 20px !important;
+    }
+
+    h4 {
+        font-size: 2.5rem !important;
+        color: black !important;
+        margin-top: 30px !important;
+    }
+
+    a.nav-link {
+        padding-left: 20px !important;
+        padding-top: 7px !important;
+        padding-bottom: 7px !important;
+    }
+
+    nav .dropdown-menu {
+        background-color: #f1f0f1;
+        border: 1px solid grey;
+        margin-bottom: 10px !important;
+        margin-right: 10px !important;
+    }
+
+    .dropdown-menu > .dropdown-item {
+        border-bottom: 1px solid grey;
+    }
+    nav .dropdown-item {
+        font-size: 2rem !important;
+    }
+
+    form input {
+        height: 70px !important;
+        font-size: 2rem !important;
+    }
+
+    .btn-primary {
+        font-size: 2rem !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
     }
 
     h2 {
-        color: #32AAE1;
-        text-align: center;
-        font-size: 22px;
+        font-size: 2.2rem !important;
+        margin-top: 30px !important;
+        margin-bottom: 30px !important;
     }
 
-    background-color: #32AAE1;
-
-    .container{
-        padding: 0px !important;
+    .adminButton {
+        width: 100% !important;
     }
 
-    nav.navbar{
-        width: 100%;
-        background-color: white;
-        height: 75px;
-        border-bottom: 10px solid #fadd00 !important;
-        top: 0;
-        z-index: 200;
+    ul.navbar-nav {
+        border: 2px solid #fadd00;
     }
-
-    .navbar-brand img {
-        width: 80%;
+    li.nav-item {
+        border-bottom: 2px solid #fadd00;
     }
-
-    article {
-        padding: 2em;
-        background-color: white;
-        img {
-            width: 100%;
-        }
-    } 
-
-    .center {
-        text-align: center;
-    }
-
-    .right {
-        text-align: right;
-    }
-
-    .left {
-        text-align: left;
-    }
-
-    .white {
-        background-color: $white;
-    }
-
-    .bold {
-        font-weight: bold;
-    }
-
-    button > a {
-        color: black;
-        text-decoration: none;
-    }
-
-    .btn.btn-info {
-        background-color: yellow;
-    }
-
-    .btn.btn-success a{
-        color: white;
-    }
-
-    .wrapper {
-        background-color: #f1f0f1;
-    }
-
-    .border-blue {
-        border: 1px solid #32AAE1 !important;
-    }
-
-    .border-yellow {
-        border: 5px solid #fadd00;
-    }
-
-    .dotted {
-        border-top:2px dotted rgba(0, 0, 0, 0.1);
-    }
-
-    .replies {
-        color: grey;
+    .navbar-collapse {
+        margin-top: 19px;
     }
 }
+
+@media (min-width: 480px) {
+    body {
+        h1 {
+            margin: 10px 10px 0px 40px;
+            font-size: 2rem;
+            font-family: 'Open-Sans';
+            padding: 10px;
+            border-left: 10px solid #fadd00;
+            color: white;
+        }
+    
+        h2 {
+            color: #32AAE1;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        h4 {
+            margin: 10px 10px 0px 40px;
+            font-size: 2rem;
+            font-family: 'Open-Sans';
+            padding: 10px;
+            border-left: 10px solid #fadd00;
+        }
+    
+        background-color: #32AAE1;
+    
+        .container{
+            padding: 0px !important;
+        }
+    
+        nav.navbar{
+            width: 100%;
+            background-color: white;
+            height: 79px;
+            border-bottom: 10px solid #fadd00 !important;
+            top: 0;
+            z-index: 200;
+        }
+    
+        article {
+            padding: 2em;
+            background-color: white;
+            img {
+                width: 100%;
+            }
+        } 
+    
+        .center {
+            text-align: center;
+        }
+    
+        .right {
+            text-align: right;
+        }
+    
+        .left {
+            text-align: left;
+        }
+    
+        .white {
+            background-color: $white;
+        }
+    
+        .bold {
+            font-weight: bold;
+        }
+    
+        button > a {
+            color: black;
+            text-decoration: none;
+        }
+    
+        .btn.btn-info {
+            background-color: yellow;
+        }
+    
+        .btn.btn-success a{
+            color: white;
+        }
+    
+        .wrapper {
+            background-color: #f1f0f1;
+        }
+    
+        .border-blue {
+            border: 1px solid #32AAE1 !important;
+        }
+    
+        .border-yellow {
+            border: 5px solid #fadd00;
+        }
+    
+        .dotted {
+            border-top:2px dotted rgba(0, 0, 0, 0.1);
+        }
+    
+        .replies {
+            color: grey;
+        }
+        nav>div>a {
+            height: 100%;
+        }
+        nav > div > a >img {
+            max-height: 100%;
+        }
+        .navbar-collapse{
+            background-color: white;
+        }
+        .nav-item{
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    
+        textarea.form-control {
+            height: 150px !important;
+        }
+        
+    }
+}
+

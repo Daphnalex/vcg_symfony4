@@ -65,6 +65,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reset_token;
+
     
     public function __construct()
     {
@@ -224,4 +225,5 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
 }

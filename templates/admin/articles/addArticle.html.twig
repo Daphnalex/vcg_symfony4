@@ -3,11 +3,13 @@
 {% block title %}Créer un article{% endblock %}
 
 {% block body %}
-
+<div class="row mt-2 mb-4">
+    <h1>Administration</h1>
+</div> 
 <div class="row">
     {{ include('admin/baseAdmin.html.twig') }}
 
-    <div class="col-md-8 white p-4">
+    <div class="col-sm-12 col-md-8 white p-4">
         <h2>Création d'un article</h2>
         <br/>
         {{form(form)}}
